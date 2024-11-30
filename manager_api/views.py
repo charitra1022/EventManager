@@ -1,10 +1,18 @@
-from django.shortcuts import render
-from rest_framework import viewsets
+from django.shortcuts import render, redirect
 
-from .serializers import SampleModelSerializer
-from .models import SampleModel
 
-class SampleViewSet(viewsets.ModelViewSet):
-    queryset = SampleModel.objects.all()
-    serializer_class = SampleModelSerializer
-    
+def homepage(req):
+    return render(req, "manager_api/home.html")
+
+def loginPage(req):
+    return render(req, "manager_api/login.html")
+
+def loginUser(req):
+    return redirect("login")
+
+def registerPage(req):
+    return render(req, "manager_api/register.html")
+
+def registerUser(req):
+    return redirect("register")
+
