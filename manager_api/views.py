@@ -1,10 +1,11 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth.models import User
 
-from .forms import RegistrationForm
+from .forms import RegistrationForm, EventCreationForm
 from .models import UserModel
 
 
@@ -47,3 +48,28 @@ def your_events(req):
     if not profile.is_organizer: return redirect("dashboard")
 
     return render(req, "manager_api/organizer_events.html", context)
+
+
+class Create_Event_View(LoginRequiredMixin, View):
+    login_url = "/login/"
+    redirect_field_name = "next"
+
+    def get(self, req):
+        context = {}
+        profile = UserModel.objects.get(user=User.objects.get(username=req.user.username))
+        if not profile.is_organizer: return redirect("dashboard")
+
+        form = EventCreationForm()
+        return render(req, "manager_api/create_event.html", {"form": form})
+
+    def post(self, req):
+        context = {}
+        profile = UserModel.objects.get(user=User.objects.get(username=req.user.username))
+        if not profile.is_organizer: return redirect("dashboard")
+
+        form = EventCreationForm(req.POST)
+        if form.is_valid():
+            messages.success(req, 'Event created Successfully!')
+            form.save()
+        return redirect("my_events")
+

@@ -1,3 +1,5 @@
+from tkinter.font import names
+
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
 
@@ -12,5 +14,7 @@ urlpatterns = [
     path("register/", views.RegistrationView.as_view(), name="register"),
 
     path("dashboard/", views.user_dashboard, name="dashboard"),
-    path("my_events/", views.your_events, name="my_events")
+    path("my_events/", views.your_events, name="my_events"),
+
+    path("create_event/", views.Create_Event_View.as_view(), name="create_event"),
 ]
