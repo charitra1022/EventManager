@@ -27,7 +27,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">EveEnts</a>
+            <a class="navbar-brand" href="{% url 'homepage' %}">EveEnts</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -51,8 +51,8 @@
 
     <!-- Event Listings -->
     <div class="container mt-4">
+        <h2>Ongoing Events</h2>
         <div class="row">
-            <!-- 20 Event Cards -->
             <!-- Card 1 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card">
@@ -67,6 +67,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Card 2 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card">
@@ -81,6 +82,41 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+
+        <h2>Upcoming Events</h2>
+        <div class="row">
+            <!-- Card 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Event Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Tech Conference 2024</h5>
+                        <p><strong>Registration Deadline:</strong> Dec 15, 2024</p>
+                        <p><strong>Venue:</strong> Silicon Valley, CA</p>
+                        <p><strong>Duration:</strong> 2 days</p>
+                        <p><strong>Start Date & Time:</strong> Dec 20, 2024, 10:00 AM</p>
+                        <a href="#" class="btn btn-primary">Register</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Event Image">
+                    <div class="card-body">
+                        <h5 class="card-title">Music Fest 2024</h5>
+                        <p><strong>Registration Deadline:</strong> Jan 5, 2024</p>
+                        <p><strong>Venue:</strong> Madison Square Garden, NY</p>
+                        <p><strong>Duration:</strong> 1 day</p>
+                        <p><strong>Start Date & Time:</strong> Jan 10, 2024, 6:00 PM</p>
+                        <a href="#" class="btn btn-primary">Register</a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Card 3 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card">
@@ -95,6 +131,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Card 4 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card">
@@ -109,6 +146,7 @@
                     </div>
                 </div>
             </div>
+
             <!-- Card 5 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card">
@@ -123,8 +161,8 @@
                     </div>
                 </div>
             </div>
-            <!-- Add 5 More Cards -->
-            <!-- Card 16 -->
+
+            <!-- Card 6 -->
             <div class="col-md-6 col-lg-4">
                 <div class="card">
                     <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Event Image">
@@ -138,8 +176,10 @@
                     </div>
                 </div>
             </div>
-            <!-- Repeat similar structure for the remaining new cards -->
         </div>
+
+
+
     </div>
 
     <!-- Latest Bootstrap JS -->
