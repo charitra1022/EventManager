@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
@@ -43,4 +43,7 @@ def user_dashboard(req):
 @login_required(login_url="/login/")
 def your_events(req):
     context = {}
+    profile = UserModel.objects.get(user=User.objects.get(username=req.user.username))
+    if not profile.is_organizer: return redirect("dashboard")
+
     return render(req, "manager_api/organizer_events.html", context)
