@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
@@ -8,7 +9,8 @@ from .models import UserModel
 
 
 def homepage(req):
-    return render(req, "manager_api/home.html")
+    context = {}
+    return render(req, "manager_api/home.html", context)
 
 
 class RegistrationView(View):
@@ -27,3 +29,12 @@ class RegistrationView(View):
             user = User.objects.get(username=form.clean_username())
             UserModel(phone_number=phn, user=user).save()
         return render(request, 'manager_api/register.html', {'form': form})
+
+
+@login_required(login_url="/login/")
+def user_dashboard(req):
+    context = {}
+    if req.user.is_authenticated:
+        profile = UserModel.objects.get(user=User.objects.get(username=req.user.username))
+        context['profile'] = profile
+    return render(req, "manager_api/dashboard.html", context)
