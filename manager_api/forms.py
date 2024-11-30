@@ -67,6 +67,10 @@ class DateTimeInput(forms.DateTimeInput):
     input_type = "datetime-local"
 
 class EventCreationForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['banner'].required = False
+
     class Meta:
         model = EventModel
         fields = ['title', 'description', 'start_date', 'end_date', 'registration_deadline', 'venue', 'registration_limit', 'banner']

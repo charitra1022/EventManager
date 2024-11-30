@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 
 from .forms import RegistrationForm, EventCreationForm
-from .models import UserModel
+from .models import UserModel, EventModel
 
 
 def homepage(req):
@@ -29,6 +29,7 @@ class RegistrationView(View):
             phn = form.cleaned_data['phone_number']
             user = User.objects.get(username=form.clean_username())
             UserModel(phone_number=phn, user=user).save()
+            form = RegistrationForm()
         return render(request, 'manager_api/register.html', {'form': form})
 
 
@@ -70,6 +71,8 @@ class Create_Event_View(LoginRequiredMixin, View):
         form = EventCreationForm(req.POST)
         if form.is_valid():
             messages.success(req, 'Event created Successfully!')
-            form.save()
-        return redirect("my_events")
+            ev_id = form.save()
+            EventModel.objects.filter(pk=ev_id.id).update(organizer=profile)
+            form = EventCreationForm()
+        return render(req, 'manager_api/create_event.html', {'form': form})
 

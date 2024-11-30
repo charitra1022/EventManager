@@ -11,7 +11,7 @@ class UserModel(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return self.user.first_name + " " + self.user.email
+        return self.user.first_name + " : " + self.user.email
 
 
 class EventModel(models.Model):
@@ -27,7 +27,10 @@ class EventModel(models.Model):
     registration_limit = models.IntegerField(default=-1)    # -1 means no limit on registrations
 
     def __str__(self) -> str:
-        return f"\"{self.title}\" by {self.organizer.user.username}"
+        org_name = "-"
+        if self.organizer:
+            org_name = self.organizer.user.username
+        return f"\"{self.title}\" by {org_name}"
 
 
 class RegistrationsModel(models.Model):
