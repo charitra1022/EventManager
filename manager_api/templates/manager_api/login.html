@@ -28,10 +28,6 @@
             text-align: center;
             margin-bottom: 1rem;
         }
-
-        .password-field {
-            margin: 10px 0;
-        }
     </style>
 </head>
 <body>
@@ -44,6 +40,13 @@
             <h4 class="card-title text-center mb-4">Login</h4>
 
             <form action="" method="post" novalidate>
+                <!-- Django message -->
+                {% if messages %}
+                  {% for message in messages %}
+                      <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+                  {% endfor %}
+                {% endif %}
+
                 {% csrf_token %}
 
                 <!-- Start For loop-->
@@ -51,6 +54,11 @@
 
                   <!-- Input Field -->
                   <div class="wrap-input validate-input">
+                    {{ f.label_tag }}
+                    <!-- Input Field Errors -->
+                      <div class="form-error">
+                        <small class="form-error text-danger">{{f.errors|striptags}}</small>
+                      </div>
                     {{f}}
 
                     <span class="focus-input"></span>
@@ -65,35 +73,19 @@
                     </span>
                   </div>
 
-                  <!-- Input Field Errors -->
-                  <div class="form-error">
-                    <small class="form-error text-danger">{{fm.errors|striptags}}</small>
-                  </div>
-
                 {% endfor %}
                 <!-- End For loop-->
 
-
-
-
-
-
-
-
-
-
-
-<!--                <div class="mb-3">-->
-<!--                    <label for="username" class="form-label">Username</label>-->
-<!--                    <input type="text" class="form-control" id="username" placeholder="Enter your username" required>-->
-<!--                </div>-->
-<!--                <div class="mb-3">-->
-<!--                    <label for="password" class="form-label">Password</label>-->
-<!--                    <input type="password" class="form-control" id="password" placeholder="Enter your password" required>-->
-<!--                </div>-->
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Login</button>
                 </div>
+
+                <!-- Form Errors -->
+                {% if form.non_field_errors %}
+                  {% for error in form.non_field_errors %}
+                    <p class="alert alert-danger my-3">{{error}}</p>
+                  {% endfor %}
+                {% endif %}
             </form>
 
             <p class="small-text pt-3">

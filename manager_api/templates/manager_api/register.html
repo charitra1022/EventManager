@@ -12,13 +12,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
             margin: 0;
+            padding: 0;
         }
         .card {
             width: 100%;
             max-width: 600px;
-            padding: 1.5rem;
+            padding: 0.1rem 1.5rem;
         }
         .btn-primary {
             width: 100%;
@@ -56,6 +56,11 @@
 
                   <!-- Input Field -->
                   <div class="wrap-input validate-input">
+                    {{ f.label_tag }}
+                      <!-- Input Field Errors -->
+                      <div class="form-error">
+                        <small class="form-error text-danger">{{f.errors|striptags}}</small>
+                      </div>
                     {{f}}
 
                     <span class="focus-input"></span>
@@ -78,11 +83,6 @@
                         {% endif %}
                       {% endif %}
                     </span>
-                  </div>
-
-                  <!-- Input Field Errors -->
-                  <div class="form-error">
-                    <small class="form-error text-danger">{{f.errors|striptags}}</small>
                   </div>
 
                 {% endfor %}
