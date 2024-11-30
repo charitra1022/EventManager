@@ -40,43 +40,66 @@
     <div class="card shadow-sm">
         <div class="card-body">
             <h4 class="card-title text-center mb-4">User Registration</h4>
-            <form>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="firstName" class="form-label">First Name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="lastName" class="form-label">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-                </div>
-                <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Choose a username" required>
-                    <div id="usernameHelp" class="form-text">Username will be used to login to your account.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="confirmPassword" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
-                    </div>
-                </div>
-                <div class="d-grid">
+
+            <form action="" method="post" novalidate>
+                <!-- Django message -->
+                {% if messages %}
+                  {% for message in messages %}
+                      <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+                  {% endfor %}
+                {% endif %}
+
+                {% csrf_token %}
+
+                <!-- Start For loop-->
+                {% for f in form %}
+
+                  <!-- Input Field -->
+                  <div class="wrap-input validate-input">
+                    {{f}}
+
+                    <span class="focus-input"></span>
+                    <span class="symbol-input">
+                      {% if 'username' in f.id_for_label %}
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                      {% else %}
+                        {% if 'password' in f.id_for_label %}
+                          <i class="fa fa-lock" aria-hidden="true"></i>
+                        {% else %}
+                          {% if 'email' in f.id_for_label %}
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+
+                          {% else %}
+                            {% if 'name' in f.id_for_label %}
+                              <i class="fas fa-user-tie" aria-hidden="true"></i>
+                            {% endif %}
+
+                          {% endif %}
+                        {% endif %}
+                      {% endif %}
+                    </span>
+                  </div>
+
+                  <!-- Input Field Errors -->
+                  <div class="form-error">
+                    <small class="form-error text-danger">{{f.errors|striptags}}</small>
+                  </div>
+
+                {% endfor %}
+                <!-- End For loop-->
+
+                <div class="d-grid mt-2">
                     <button type="submit" class="btn btn-primary">Register</button>
                 </div>
+
+
+                <!-- Form Errors -->
+                {% if form.non_field_errors %}
+                  {% for error in form.non_field_errors %}
+                    <p class="alert alert-danger my-3">{{error}}</p>
+                  {% endfor %}
+                {% endif %}
+
             </form>
             <p class="small-text">
                 Already have an account? <a href="{% url 'login' %}">Login here</a>.
