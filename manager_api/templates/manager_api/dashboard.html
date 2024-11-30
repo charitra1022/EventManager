@@ -39,12 +39,17 @@
 </head>
 <body>
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar p-3">
         <span>&nbsp;Welomce, {{request.user.first_name|capfirst}}!</span>
         <a href="{% url 'homepage' %}">Home</a>
         <a href="#profile" class="active" onclick="showSection('profile')">Profile</a>
         <a href="#changePassword" onclick="showSection('changePassword')">Change Password</a>
-        <a href="event.html">Events</a>
+
+        {% if profile.is_organizer %}
+            <a href="{% url 'my_events' %}">Events</a>
+        {% else %}
+            <a class="btn btn-primary w-75">Become Organizer</a>
+        {% endif %}
     </div>
 
     <!-- Content -->

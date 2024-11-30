@@ -12,4 +12,5 @@ urlpatterns = [
     path("register/", views.RegistrationView.as_view(), name="register"),
 
     path("dashboard/", views.user_dashboard, name="dashboard"),
+    path("my_events/", views.your_events, name="my_events")
 ]

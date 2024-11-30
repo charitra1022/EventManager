@@ -38,3 +38,9 @@ def user_dashboard(req):
         profile = UserModel.objects.get(user=User.objects.get(username=req.user.username))
         context['profile'] = profile
     return render(req, "manager_api/dashboard.html", context)
+
+
+@login_required(login_url="/login/")
+def your_events(req):
+    context = {}
+    return render(req, "manager_api/organizer_events.html", context)
