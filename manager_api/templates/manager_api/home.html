@@ -51,131 +51,127 @@
 
     <!-- Event Listings -->
     <div class="container mt-4">
+        <h2>Registered Events</h2>
+        <div class="row">
+            {% for event in registered_events %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        {% if event.banner %}
+                            <img src="{{event.banner}}" class="card-img-top" alt="Event Image">
+                        {% else %}
+                            <img src="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" class="card-img-top" alt="Event Image">
+                        {% endif %}
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{event.title}}</h5>
+                            <p><strong>Registration Deadline:</strong>{{event.registration_deadline}}</p>
+                            <p><strong>Venue:</strong>{{event.venue}}</p>
+                            <p><strong>Duration:</strong>{{event.end_date}}</p>
+                            <p><strong>Start Date & Time:</strong>{{event.start_date}}</p>
+                            <!-- Buttons -->
+                            <div class="d-flex">
+                                <a href="#" class="btn btn-primary me-2">Edit</a>
+                                <a href="#" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="pt-2 pb-5 h3 text-body-tertiary text-center">Register into some events to show here!</div>
+            {% endfor %}
+        </div>
+
+
         <h2>Ongoing Events</h2>
         <div class="row">
-            <!-- Card 1 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Event Image">
-                    <div class="card-body">
-                        <h5 class="card-title">Tech Conference 2024</h5>
-                        <p><strong>Registration Deadline:</strong> Dec 15, 2024</p>
-                        <p><strong>Venue:</strong> Silicon Valley, CA</p>
-                        <p><strong>Duration:</strong> 2 days</p>
-                        <p><strong>Start Date & Time:</strong> Dec 20, 2024, 10:00 AM</p>
-                        <a href="#" class="btn btn-primary">Register</a>
-                    </div>
-                </div>
-            </div>
+            {% for event in ongoing_events %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        {% if event.banner %}
+                            <img src="{{event.banner}}" class="card-img-top" alt="Event Image">
+                        {% else %}
+                            <img src="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" class="card-img-top" alt="Event Image">
+                        {% endif %}
 
-            <!-- Card 2 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Event Image">
-                    <div class="card-body">
-                        <h5 class="card-title">Music Fest 2024</h5>
-                        <p><strong>Registration Deadline:</strong> Jan 5, 2024</p>
-                        <p><strong>Venue:</strong> Madison Square Garden, NY</p>
-                        <p><strong>Duration:</strong> 1 day</p>
-                        <p><strong>Start Date & Time:</strong> Jan 10, 2024, 6:00 PM</p>
-                        <a href="#" class="btn btn-primary">Register</a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{event.title}}</h5>
+                            <p><strong>Registration Deadline:</strong>{{event.registration_deadline}}</p>
+                            <p><strong>Venue:</strong>{{event.venue}}</p>
+                            <p><strong>Duration:</strong>{{event.end_date}}</p>
+                            <p><strong>Start Date & Time:</strong>{{event.start_date}}</p>
+                            <!-- Buttons -->
+                            <div class="d-flex">
+                                <a href="#" class="btn btn-primary me-2">Edit</a>
+                                <a href="#" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% empty %}
+                <div class="pt-2 pb-5 h3 text-body-tertiary text-center">No ongoing events!</div>
+            {% endfor %}
         </div>
 
 
         <h2>Upcoming Events</h2>
         <div class="row">
-            <!-- Card 1 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Event Image">
-                    <div class="card-body">
-                        <h5 class="card-title">Tech Conference 2024</h5>
-                        <p><strong>Registration Deadline:</strong> Dec 15, 2024</p>
-                        <p><strong>Venue:</strong> Silicon Valley, CA</p>
-                        <p><strong>Duration:</strong> 2 days</p>
-                        <p><strong>Start Date & Time:</strong> Dec 20, 2024, 10:00 AM</p>
-                        <a href="#" class="btn btn-primary">Register</a>
-                    </div>
-                </div>
-            </div>
+            {% for event in upcoming_events %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        {% if event.banner %}
+                            <img src="{{event.banner}}" class="card-img-top" alt="Event Image">
+                        {% else %}
+                            <img src="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" class="card-img-top" alt="Event Image">
+                        {% endif %}
 
-            <!-- Card 2 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Event Image">
-                    <div class="card-body">
-                        <h5 class="card-title">Music Fest 2024</h5>
-                        <p><strong>Registration Deadline:</strong> Jan 5, 2024</p>
-                        <p><strong>Venue:</strong> Madison Square Garden, NY</p>
-                        <p><strong>Duration:</strong> 1 day</p>
-                        <p><strong>Start Date & Time:</strong> Jan 10, 2024, 6:00 PM</p>
-                        <a href="#" class="btn btn-primary">Register</a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{event.title}}</h5>
+                            <p><strong>Registration Deadline:</strong>{{event.registration_deadline}}</p>
+                            <p><strong>Venue:</strong>{{event.venue}}</p>
+                            <p><strong>Duration:</strong>{{event.end_date}}</p>
+                            <p><strong>Start Date & Time:</strong>{{event.start_date}}</p>
+                            <!-- Buttons -->
+                            <div class="d-flex">
+                                <a href="#" class="btn btn-primary me-2">Edit</a>
+                                <a href="#" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% empty %}
+                <div class="pt-2 pb-5 h3 text-body-tertiary text-center">No upcoming events!</div>
+            {% endfor %}
+        </div>
 
-            <!-- Card 3 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Event Image">
-                    <div class="card-body">
-                        <h5 class="card-title">Art Expo 2024</h5>
-                        <p><strong>Registration Deadline:</strong> Feb 1, 2024</p>
-                        <p><strong>Venue:</strong> Art Institute, Chicago</p>
-                        <p><strong>Duration:</strong> 3 days</p>
-                        <p><strong>Start Date & Time:</strong> Feb 10, 2024, 9:00 AM</p>
-                        <a href="#" class="btn btn-primary">Register</a>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Card 4 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Event Image">
-                    <div class="card-body">
-                        <h5 class="card-title">Startup Meet 2024</h5>
-                        <p><strong>Registration Deadline:</strong> Mar 15, 2024</p>
-                        <p><strong>Venue:</strong> Boston Tech Hub, MA</p>
-                        <p><strong>Duration:</strong> 2 days</p>
-                        <p><strong>Start Date & Time:</strong> Mar 20, 2024, 11:00 AM</p>
-                        <a href="#" class="btn btn-primary">Register</a>
-                    </div>
-                </div>
-            </div>
+        <h2>Past Events</h2>
+        <div class="row">
+            {% for event in past_events %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        {% if event.banner %}
+                            <img src="{{event.banner}}" class="card-img-top" alt="Event Image">
+                        {% else %}
+                            <img src="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" class="card-img-top" alt="Event Image">
+                        {% endif %}
 
-            <!-- Card 5 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Event Image">
-                    <div class="card-body">
-                        <h5 class="card-title">Gaming Championship</h5>
-                        <p><strong>Registration Deadline:</strong> Apr 10, 2024</p>
-                        <p><strong>Venue:</strong> E-Sports Arena, LA</p>
-                        <p><strong>Duration:</strong> 1 day</p>
-                        <p><strong>Start Date & Time:</strong> Apr 15, 2024, 2:00 PM</p>
-                        <a href="#" class="btn btn-primary">Register</a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{event.title}}</h5>
+                            <p><strong>Registration Deadline:</strong>{{event.registration_deadline}}</p>
+                            <p><strong>Venue:</strong>{{event.venue}}</p>
+                            <p><strong>Duration:</strong>{{event.end_date}}</p>
+                            <p><strong>Start Date & Time:</strong>{{event.start_date}}</p>
+                            <!-- Buttons -->
+                            <div class="d-flex">
+                                <a href="#" class="btn btn-primary me-2">Edit</a>
+                                <a href="#" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Event Image">
-                    <div class="card-body">
-                        <h5 class="card-title">Design Workshop</h5>
-                        <p><strong>Registration Deadline:</strong> Jun 5, 2024</p>
-                        <p><strong>Venue:</strong> Creative Space, LA</p>
-                        <p><strong>Duration:</strong> 3 days</p>
-                        <p><strong>Start Date & Time:</strong> Jun 12, 2024, 10:00 AM</p>
-                        <a href="#" class="btn btn-primary">Register</a>
-                    </div>
-                </div>
-            </div>
+            {% empty %}
+                <div class="pt-2 pb-5 h3 text-body-tertiary text-center">No past events!</div>
+            {% endfor %}
         </div>
 
 

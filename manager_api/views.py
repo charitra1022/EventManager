@@ -11,6 +11,20 @@ from .models import UserModel, EventModel
 
 def homepage(req):
     context = {}
+
+    past_events = []
+    ongoing_events = []
+    upcoming_events = []
+    registered_events = []
+
+    events = EventModel.objects.all()
+
+    context['past_events'] = past_events
+    context['ongoing_events'] = ongoing_events
+    context['upcoming_events'] = upcoming_events
+    context['registered_events'] = registered_events
+
+
     return render(req, "manager_api/home.html", context)
 
 
