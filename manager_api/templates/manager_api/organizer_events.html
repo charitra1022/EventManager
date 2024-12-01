@@ -62,24 +62,33 @@
         </div>
 
         <div class="row">
-            <!-- Card 1 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Event Image">
-                    <div class="card-body">
-                        <h5 class="card-title">Tech Conference 2024</h5>
-                        <p><strong>Registration Deadline:</strong> Dec 15, 2024</p>
-                        <p><strong>Venue:</strong> Silicon Valley, CA</p>
-                        <p><strong>Duration:</strong> 2 days</p>
-                        <p><strong>Start Date & Time:</strong> Dec 20, 2024, 10:00 AM</p>
-                        <!-- Buttons -->
-                        <div class="d-flex">
-                            <a href="#" class="btn btn-primary me-2">Edit</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
+
+            {% for event in events %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        {% if event.banner %}
+                            <img src="{{event.banner}}" class="card-img-top" alt="Event Image">
+                        {% else %}
+                            <img src="https://media.istockphoto.com/id/1409329028/vector/no-picture-available-placeholder-thumbnail-icon-illustration-design.jpg?s=612x612&w=0&k=20&c=_zOuJu755g2eEUioiOUdz_mHKJQJn-tDgIAhQzyeKUQ=" class="card-img-top" alt="Event Image">
+                        {% endif %}
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{event.title}}</h5>
+                            <p><strong>Registration Deadline:</strong>{{event.registration_deadline}}</p>
+                            <p><strong>Venue:</strong>{{event.venue}}</p>
+                            <p><strong>Duration:</strong>{{event.end_date}}</p>
+                            <p><strong>Start Date & Time:</strong>{{event.start_date}}</p>
+                            <!-- Buttons -->
+                            <div class="d-flex">
+                                <a href="#" class="btn btn-primary me-2">Edit</a>
+                                <a href="#" class="btn btn-danger">Delete</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            {% empty %}
+                <div class="p-5 h1 text-body-tertiary text-center">Create some events to show here!</div>
+            {% endfor %}
         </div>
     </div>
 

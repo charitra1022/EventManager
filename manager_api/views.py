@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
@@ -47,6 +47,9 @@ def your_events(req):
     context = {}
     profile = UserModel.objects.get(user=User.objects.get(username=req.user.username))
     if not profile.is_organizer: return redirect("dashboard")
+
+    events = EventModel.objects.filter(organizer=profile)
+    context["events"] = events
 
     return render(req, "manager_api/organizer_events.html", context)
 
