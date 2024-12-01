@@ -17,4 +17,6 @@ urlpatterns = [
     path("my_events/", views.your_events, name="my_events"),
 
     path("create_event/", views.Create_Event_View.as_view(), name="create_event"),
+
+    path("event/<int:pk>/", views.event_details, name="event_details")
 ]

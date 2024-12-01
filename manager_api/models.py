@@ -13,6 +13,9 @@ class UserModel(models.Model):
     def __str__(self) -> str:
         return self.user.first_name + " : " + self.user.email
 
+    def full_name(self):
+        return self.user.first_name + " " + self.user.last_name
+
 
 class EventModel(models.Model):
     title = models.CharField(max_length=100, null=False)

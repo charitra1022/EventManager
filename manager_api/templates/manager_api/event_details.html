@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <!-- Latest Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .banner {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+        }
+        .event-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .event-section {
+            margin-bottom: 1.5rem;
+        }
+        .event-details {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .btn-register {
+            font-size: 1.2rem;
+            padding: 0.75rem 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Event Banner -->
+    <div class="banner" style="background-image: url('{{event.banner}}');"></div>
+
+    <!-- Event Details -->
+    <div class="container my-5">
+        <div class="event-details">
+            <h1 class="event-title">{{event.title}}</h1>
+            <p class="text-muted mb-4">Join us for an exciting tech-filled event!</p>
+
+            <!-- Event Description -->
+            <div class="event-section">
+                <h4>Description</h4>
+                <p>{{event.description}}</p>
+            </div>
+
+            <!-- Event Info -->
+            <div class="event-section">
+                <h4>Event Details</h4>
+                <p><strong>Start Date:</strong> {{event.start_date}}</p>
+                <p><strong>End Date:</strong> {{event.end_date}}</p>
+                <p><strong>Venue:</strong> {{event.venue}}</p>
+                <p><strong>Registration Deadline:</strong> {{event.registration_deadline}}</p>
+                <p><strong>Registration Limit:</strong> {{event.registration_limit}}</p>
+            </div>
+
+            <!-- Organizer Info -->
+            <div class="event-section">
+                <h4>Organizer</h4>
+                <p><strong>Name:</strong> {{event.organizer.full_name}}</p>
+                <p><strong>Contact:</strong> {{event.organizer.phone_number}}</p>
+            </div>
+
+            <!-- Register Button -->
+          <div class="text-center mt-4">
+            {% if registration_closed %}
+              <a href="#" class="btn btn-secondary btn-register disabled">Registrations Closed</a>
+            {% else %}
+              <a href="#" class="btn btn-primary btn-register">Register Now</a>
+            {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Latest Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

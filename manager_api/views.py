@@ -9,6 +9,33 @@ from django.utils import timezone
 from .forms import RegistrationForm, EventCreationForm
 from .models import UserModel, EventModel
 
+from .enums import EventOccurence
+
+def compare_datetime(starttime, endtime, deadline):
+    """
+    Give the state of the event
+
+    Parameters
+        starttime -> Django DateTimeField value for start time
+        endtime -> Django DateTimeField value for end time
+        deadline -> Django DateTimeField value for registration deadline time
+
+    Returns: A tuple that can contain any of the combination of below enum values
+        EventOccurence.PAST -> if the event was in past
+        EventOccurence.ONGOING -> if the event is currently ongoing
+        EventOccurence.UPCOMING -> if the event is upcoming
+        EventOccurence.CLOSED -> if the event registration is closed
+        EventOccurence.OPEN -> if the event registration is open
+    """
+    now = timezone.now()
+    registration = EventOccurence.CLOSED if deadline <= now else EventOccurence.OPEN
+    if starttime > now:
+        return EventOccurence.UPCOMING, registration
+    elif endtime <= now:
+        return EventOccurence.PAST, registration
+    elif starttime <= now < endtime:
+        return EventOccurence.ONGOING, registration
+
 
 def homepage(req):
     context = {}
@@ -21,15 +48,12 @@ def homepage(req):
     events = EventModel.objects.all()
 
     for event in events:
-        starttime = event.start_date
-        endtime = event.end_date
-        now = timezone.now()
-
-        if starttime > now:
-            upcoming_events.append(event)
-        elif endtime <= now:
+        event_occ = compare_datetime(event.start_date, event.end_date, event.registration_deadline)
+        if EventOccurence.PAST in event_occ:
             past_events.append(event)
-        elif starttime <= now < endtime:
+        if EventOccurence.UPCOMING in event_occ:
+            upcoming_events.append(event)
+        if EventOccurence.ONGOING in event_occ:
             ongoing_events.append(event)
 
     context['past_events'] = past_events
@@ -106,3 +130,15 @@ class Create_Event_View(LoginRequiredMixin, View):
             form = EventCreationForm()
         return render(req, 'manager_api/create_event.html', {'form': form})
 
+
+def event_details(req, pk):
+    context = {}
+    try:
+        event = EventModel.objects.get(id=pk)
+        context['event'] = event
+        event_occ = compare_datetime(event.start_date, event.end_date, event.registration_deadline)
+        context['registration_closed'] = True if EventOccurence.CLOSED in event_occ else False
+        return render(req, "manager_api/event_details.html", context)
+
+    except Exception as ex:
+        return render(req, "manager_api/404.html")
