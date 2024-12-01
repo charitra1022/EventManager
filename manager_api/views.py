@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 from .forms import RegistrationForm, EventCreationForm
 from .models import UserModel, EventModel
@@ -18,6 +19,18 @@ def homepage(req):
     registered_events = []
 
     events = EventModel.objects.all()
+
+    for event in events:
+        starttime = event.start_date
+        endtime = event.end_date
+        now = timezone.now()
+
+        if starttime > now:
+            upcoming_events.append(event)
+        elif endtime <= now:
+            past_events.append(event)
+        elif starttime <= now < endtime:
+            ongoing_events.append(event)
 
     context['past_events'] = past_events
     context['ongoing_events'] = ongoing_events
